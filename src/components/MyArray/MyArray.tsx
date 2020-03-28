@@ -11,11 +11,13 @@ type MyArrayProps = {
 };
 
 class MyArray extends Component<MyArrayProps, MyArrayState> {
-  state: MyArrayState = { numbers: [] };
-
   constructor(props: MyArrayProps) {
     super(props);
     console.log(props.numbers);
+    this.state = { numbers: [] };
+  }
+
+  componentDidMount() {
     this.setState({ numbers: this.props.numbers });
   }
 
