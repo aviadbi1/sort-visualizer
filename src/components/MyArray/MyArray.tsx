@@ -21,9 +21,29 @@ class MyArray extends Component<MyArrayProps, MyArrayState> {
     this.setState({ numbers: this.props.numbers });
   }
 
+  bubbleSort = () => {
+    let arr = this.state.numbers;
+    let n = arr.length;
+    for (let i = 0; i < n - 1; i++) {
+      for (let j = 0; j < n - i - 1; j++) {
+        if (arr[j] > arr[j + 1]) {
+          // swap arr[j+1] and arr[i]
+          let temp = arr[j];
+          arr[j] = arr[j + 1];
+          this.setState({ numbers: arr });
+          arr[j + 1] = temp;
+          this.setState({ numbers: arr });
+        }
+      }
+    }
+  };
+
   render() {
     return (
       <div className="Array">
+        <button className="button" onClick={this.bubbleSort}>
+          Sort this bitch
+        </button>
         <div>
           {this.props.numbers}
           <div>
