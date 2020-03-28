@@ -48,11 +48,9 @@ class MyArray extends Component<MyArrayProps, MyArrayState> {
       <div className="container">
         <div>{this.props.numbers}</div>
         <div className="array">
-          <div>
-            {this.state.numbers.map(n => (
-              <MyArrayValue value={n}></MyArrayValue>
-            ))}
-          </div>
+          {this.state.numbers.map((n, index) => (
+            <MyArrayValue key={index} value={n}></MyArrayValue>
+          ))}
         </div>
         <button className="button" onClick={this.bubbleSort}>
           Sort this bitch

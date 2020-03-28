@@ -1,0 +1,30 @@
+$totalRows: 5; //should be max + 1
+
+.chart {
+  display: grid;
+  // grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(calc($totalRows - 1), 1fr);
+  height: 100px;
+  width: inherit;
+  padding: 5px 10px;
+}
+
+[class*="bar"] {
+  border-radius: 5px 5px 0 0;
+  transition: all 0.6s ease;
+  background-color: #ad3029;
+  flex-grow: 1;
+  flex-shrink: 1;
+  grid-row-end: $totalRows;
+}
+
+@mixin chartValue($data) {
+  $res: $totalRows -$data;
+  grid-row-start: $res;
+}
+
+@for $i from 1 through $totalRows {
+  .bar-#{$i} {
+    @include chartValue($i);
+  }
+}
