@@ -1,11 +1,11 @@
-$totalRows: 5; //should be max + 1
+$totalRows: 11; //should be max + 1
 
 .chart {
   display: grid;
   // grid-template-columns: repeat(1, 1fr);
   grid-template-rows: repeat(calc($totalRows - 1), 1fr);
-  height: 100px;
-  width: inherit;
+  height: 10rem;
+  width: 2rem;
   padding: 5px 10px;
 }
 

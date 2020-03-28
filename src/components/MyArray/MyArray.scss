@@ -1,9 +1,6 @@
 .container {
   color: cornflowerblue;
-  border-style: dotted;
-  border-color: rebeccapurple;
-  border-radius: 20px;
-  width: 40vw;
+  height: 70vh;
 }
 
 .array {
@@ -12,10 +9,11 @@
   flex-wrap: nowrap;
   justify-content: center;
   align-items: flex-end;
+  position: relative;
 }
 
 .button {
-  background-color: #4caf50; /* Green */
+  background-color: #4caf50;
   border: none;
   color: white;
   padding: 15px 32px;

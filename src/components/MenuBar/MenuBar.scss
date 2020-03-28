@@ -1,0 +1,30 @@
+.menu {
+  font-size: 14px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+%button {
+  font-family: cursive;
+  border: transparent;
+  background-color: transparent;
+  transition-duration: 0.4s;
+  padding: 0px 20px;
+  color: white;
+}
+
+.menu button {
+  @extend %button;
+}
+
+.submitButton:hover {
+  color: white;
+  background-color: rgb(124, 53, 255);
+}
+
+.submitButton:active {
+  background-color: transparent;
+  color: rgb(124, 53, 255);
+}

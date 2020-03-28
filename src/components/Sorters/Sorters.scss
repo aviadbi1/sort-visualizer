@@ -1,0 +1,17 @@
+.sorters {
+  font-size: 14px;
+  flex-shrink: 1;
+}
+
+.sorters button {
+  padding: 5px 20px;
+}
+
+.sorters button:hover {
+  color: rgb(124, 53, 255);
+}
+
+.sorters button:active {
+  background-color: transparent;
+  color: rgb(124, 53, 255);
+}
