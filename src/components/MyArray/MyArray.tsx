@@ -18,10 +18,15 @@ class MyArray extends Component<MyArrayProps, MyArrayState> {
   }
 
   componentDidMount() {
-    this.setState({ numbers: this.props.numbers });
+    this.setState({ numbers: [...this.props.numbers] }); // clone array
   }
 
-  bubbleSort = () => {
+  updateState = async (arr: Array<number>) => {
+    await new Promise(r => setTimeout(r, 1000));
+    this.setState({ numbers: arr });
+  };
+
+  bubbleSort = async () => {
     let arr = this.state.numbers;
     let n = arr.length;
     for (let i = 0; i < n - 1; i++) {
@@ -30,9 +35,9 @@ class MyArray extends Component<MyArrayProps, MyArrayState> {
           // swap arr[j+1] and arr[i]
           let temp = arr[j];
           arr[j] = arr[j + 1];
-          this.setState({ numbers: arr });
+          this.updateState(arr);
           arr[j + 1] = temp;
-          this.setState({ numbers: arr });
+          await this.updateState(arr);
         }
       }
     }
@@ -40,18 +45,18 @@ class MyArray extends Component<MyArrayProps, MyArrayState> {
 
   render() {
     return (
-      <div className="Array">
-        <button className="button" onClick={this.bubbleSort}>
-          Sort this bitch
-        </button>
-        <div>
-          {this.props.numbers}
+      <div className="container">
+        <div>{this.props.numbers}</div>
+        <div className="array">
           <div>
             {this.state.numbers.map(n => (
               <MyArrayValue value={n}></MyArrayValue>
             ))}
           </div>
         </div>
+        <button className="button" onClick={this.bubbleSort}>
+          Sort this bitch
+        </button>
       </div>
     );
   }

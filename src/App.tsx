@@ -19,7 +19,7 @@ function App() {
         >
           Learn React
         </a> */}
-        <MyArray numbers={[1, 3, 2]}></MyArray>
+        <MyArray numbers={[4, 3, 2, 1, 1]}></MyArray>
       </header>
     </div>
   );

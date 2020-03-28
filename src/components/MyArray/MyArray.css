@@ -1,8 +1,13 @@
-.Array {
+.container {
   color: cornflowerblue;
   border-style: dotted;
   border-color: rebeccapurple;
   border-radius: 20px;
+}
+
+.array {
+  display: flex;
+  flex-direction: row;
 }
 
 .button {
