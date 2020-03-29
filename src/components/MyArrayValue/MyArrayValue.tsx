@@ -1,18 +1,22 @@
 import React from "react";
 import "./MyArrayValue.scss";
 
-type MyArrayValueState = {
+type MyArrayValueProps = {
+  item: MyArrayValueItemType;
+};
+
+export type MyArrayValueItemType = {
   value: number;
   active: boolean;
 };
 
-function MyArrayValue(props: MyArrayValueState) {
-  let active = props.active ? "-active" : "";
+export function MyArrayValue(props: MyArrayValueProps) {
+  let active = props.item.active ? "-active" : "";
   return (
     <div className="chart">
-      <div className={`bar${active}-${props.value}`}>{/* {props.value} */}</div>
+      <div className={`bar${active}-${props.item.value}`}>
+        {/* {props.value} */}
+      </div>
     </div>
   );
 }
-
-export default MyArrayValue;
