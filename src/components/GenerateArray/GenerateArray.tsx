@@ -1,9 +1,7 @@
 import React, { ChangeEvent } from "react";
 import "./GenerateArray.scss";
 
-type GenerateArrayProps = {
-  generateNewArray(numberOfCells: number): void;
-};
+type GenerateArrayProps = {};
 
 function GenerateArray(props: GenerateArrayProps) {
   let value = "50";
@@ -11,7 +9,7 @@ function GenerateArray(props: GenerateArrayProps) {
   const sliderChange = (event: ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.value);
     value = event.target.value;
-    props.generateNewArray(parseInt(value));
+    console.log(parseInt(value));
   };
 
   return (

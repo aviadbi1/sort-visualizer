@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import "./MyArray.scss";
 import MyArrayValue from "../MyArrayValue/MyArrayValue";
 
@@ -10,67 +10,60 @@ type MyArrayProps = {
   numbers: Array<number>;
 };
 
-class MyArray extends Component<MyArrayProps, MyArrayState> {
-  constructor(props: MyArrayProps) {
-    super(props);
-    this.state = { numbers: [] };
-  }
+function MyArray() {
+  const [numbers, setNumbers] = useState<Array<number>>([4, 2]);
+  const MIN = 1;
+  const MAX = 100;
 
-  componentDidMount() {
-    this.setState({ numbers: [...this.props.numbers] }); // clone array
-  }
+  useEffect(() => {});
 
-  static getDerivedStateFromProps(props: MyArrayProps, state: MyArrayState) {
-    if (props.numbers !== state.numbers) {
-      return {
-        // numbers: [...props.numbers]
-        numbers: props.numbers
-      };
+  const generateNewArray = (numOfCells: number) => {
+    let newArr = [];
+    for (let i = 0; i < numOfCells; i++) {
+      const val = Math.floor(MIN + Math.random() * MAX);
+      newArr[i] = val;
     }
-    // Return null to indicate no change to state.
-    return null;
-  }
+    setNumbers([...newArr]);
+  };
 
-  bubbleSort = async () => {
-    let arr = this.state.numbers;
+  const bubbleSort = async () => {
+    let arr = numbers;
     let n = arr.length;
     for (let i = 0; i < n - 1; i++) {
       for (let j = 0; j < n - i - 1; j++) {
         if (arr[j] > arr[j + 1]) {
-          await this.swap(arr, j, j + 1);
+          await swap(arr, j, j + 1);
         }
       }
     }
   };
 
-  swap = async (arr: Array<number>, i: number, j: number) => {
+  const swap = async (arr: Array<number>, i: number, j: number) => {
     let temp = arr[i];
     arr[i] = arr[j];
-    this.updateState(arr);
+    updateState(arr);
     arr[j] = temp;
-    await this.updateState(arr);
+    await updateState(arr);
   };
 
-  updateState = async (arr: Array<number>) => {
+  const updateState = async (arr: Array<number>) => {
     await new Promise(r => setTimeout(r, 500));
-    this.setState({ numbers: arr });
+    setNumbers([...arr]);
   };
 
-  render() {
-    return (
-      <div className="container">
-        {/* <div>{this.props.numbers.toString()}</div> */}
-        <div className="array">
-          {this.state.numbers.map((n, index) => (
-            <MyArrayValue active={false} key={index} value={n}></MyArrayValue>
-          ))}
-        </div>
-        <button className="button" onClick={this.bubbleSort}>
-          Sort this bitch
-        </button>
+  return (
+    <div className="container">
+      {/* <div>{this.props.numbers.toString()}</div> */}
+      <div className="array">
+        {numbers.map((n, index) => (
+          <MyArrayValue active={false} key={index} value={n}></MyArrayValue>
+        ))}
       </div>
-    );
-  }
+      <button className="button" onClick={bubbleSort}>
+        Sort this bitch
+      </button>
+    </div>
+  );
 }
 
 export default MyArray;

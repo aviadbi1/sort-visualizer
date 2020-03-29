@@ -3,14 +3,12 @@ import "./MenuBar.scss";
 import Sorters from "../Sorters/Sorters";
 import GenerateArray from "../GenerateArray/GenerateArray";
 
-type MenuBarProps = {
-  generateNewArray(numberOfCells: number): void;
-};
+type MenuBarProps = {};
 
 function MenuBar(props: MenuBarProps) {
   return (
     <div className="menu">
-      <GenerateArray generateNewArray={props.generateNewArray}></GenerateArray>
+      <GenerateArray></GenerateArray>
       <Sorters></Sorters>
       <button className="submitButton">Sort this Biatchh</button>
     </div>
