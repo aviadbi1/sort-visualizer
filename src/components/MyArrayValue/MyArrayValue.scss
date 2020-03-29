@@ -1,18 +1,17 @@
-$totalRows: 11; //should be max + 1
+$totalRows: 101; //should be max + 1
 
 .chart {
   display: grid;
   // grid-template-columns: repeat(1, 1fr);
   grid-template-rows: repeat(calc($totalRows - 1), 1fr);
-  height: 10rem;
-  width: 2rem;
-  padding: 5px 10px;
+  height: 60vh;
+  width: 0.5em;
+  padding: 5px 0.5px;
 }
 
 [class*="bar"] {
   border-radius: 5px 5px 0 0;
   transition: all 0.6s ease;
-  background-color: #ad3029;
   flex-grow: 1;
   flex-shrink: 1;
   grid-row-end: $totalRows;
@@ -25,6 +24,14 @@ $totalRows: 11; //should be max + 1
 
 @for $i from 1 through $totalRows {
   .bar-#{$i} {
+    background-color: #2962ad;
     @include chartValue($i);
+  }
+}
+
+@for $i from 1 through $totalRows {
+  .bar-active-#{$i} {
+    @include chartValue($i);
+    background-color: rgb(39, 218, 173);
   }
 }
