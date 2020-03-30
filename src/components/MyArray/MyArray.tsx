@@ -21,19 +21,8 @@ function MyArray() {
     { value: 10, active: false },
     { value: 20, active: false }
   ]);
-  const MIN = 1;
-  const MAX = 100;
 
   useEffect(() => {});
-
-  // const generateNewArray = (numOfCells: number) => {
-  //   let newArr = [];
-  //   for (let i = 0; i < numOfCells; i++) {
-  //     const val = Math.floor(MIN + Math.random() * MAX);
-  //     newArr[i] = val;
-  //   }
-  //   setNumbers([...newArr]);
-  // };
 
   const bubbleSort = async () => {
     let arr = numbers;

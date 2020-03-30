@@ -1,7 +1,7 @@
 import React from "react";
 import "./MenuBar.scss";
-import Sorters from "../Sorters/Sorters";
-import GenerateArray from "../GenerateArray/GenerateArray";
+import GenerateArray from "../../containers/generateArray";
+import FilterSorters from "../../containers/sorters";
 
 type MenuBarProps = {};
 
@@ -9,7 +9,7 @@ function MenuBar(props: MenuBarProps) {
   return (
     <div className="menu">
       <GenerateArray></GenerateArray>
-      <Sorters></Sorters>
+      <FilterSorters></FilterSorters>
       <button className="submitButton">Sort this Biatchh</button>
     </div>
   );
