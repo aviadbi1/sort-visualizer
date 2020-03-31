@@ -23,6 +23,7 @@ function Sorters(props: any) {
     for (let i = 0; i < n - 1; i++) {
       for (let j = 0; j < n - i - 1; j++) {
         props.activeComparison([j, j + 1]);
+        await new Promise(r => setTimeout(r, 300));
         if (arr[j] > arr[j + 1]) {
           await swap(arr, j, j + 1);
         }
@@ -31,8 +32,8 @@ function Sorters(props: any) {
   };
 
   const swap = async (arr: Array<number>, i: number, j: number) => {
-    await new Promise(r => setTimeout(r, 100));
     props.swapCells();
+    await new Promise(r => setTimeout(r, 500));
     let temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;

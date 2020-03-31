@@ -5,14 +5,18 @@ type MyArrayValueProps = {
   value: number;
   active: boolean;
   swap: boolean;
+  // finished: boolean;
 };
 
 export function MyArrayValue(props: MyArrayValueProps) {
-  let active = props.active ? "-active" : "";
-  // let swap = props.swap ? "-swap" : "";
+  let active = props.active ? "active" : "";
+  let swap = props.swap ? "swap" : "";
+
   return (
     <div className="chart">
-      <div className={`bar${active}-${props.value}`}>{/* {props.value} */}</div>
+      <div className={`bar-${props.value} ${swap} ${active}`}>
+        {/* {props.value} */}
+      </div>
     </div>
   );
 }

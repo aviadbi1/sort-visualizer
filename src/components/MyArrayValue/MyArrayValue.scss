@@ -11,7 +11,7 @@ $totalRows: 101; //should be max + 1
 
 [class*="bar"] {
   border-radius: 5px 5px 0 0;
-  transition: all 0.6s ease;
+  transition: all 0.4s ease;
   flex-grow: 1;
   flex-shrink: 1;
   grid-row-end: $totalRows;
@@ -29,9 +29,17 @@ $totalRows: 101; //should be max + 1
   }
 }
 
-@for $i from 1 through $totalRows {
-  .bar-active-#{$i} {
-    @include chartValue($i);
-    background-color: rgb(39, 218, 173);
-  }
+.active {
+  background-color: rgb(39, 218, 173);
+  transition: all 0.4s ease;
+}
+
+.swap {
+  background-color: rgb(235, 60, 197);
+  transition: all 0.2s ease;
+}
+
+.finished {
+  background-color: rgb(39, 218, 108);
+  transition: all 0.4s ease;
 }
