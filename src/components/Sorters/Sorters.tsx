@@ -1,11 +1,18 @@
 import React from "react";
-import { chooseSorter, startSorting } from "../../redux/sort/actions";
+import {
+  chooseSorter,
+  startSorting,
+  swapCells,
+  activeComparison
+} from "../../redux/sort/actions";
 import { SortState, SortFunction } from "../../redux/sort/types";
 import "./Sorters.scss";
 
 interface SortersProps {
   sort: SortState;
   chooseSorter: typeof chooseSorter;
+  activeComparison: typeof activeComparison;
+  swapCells: typeof swapCells;
   startSorting: typeof startSorting;
 }
 
@@ -15,6 +22,7 @@ function Sorters(props: any) {
     let n = arr.length;
     for (let i = 0; i < n - 1; i++) {
       for (let j = 0; j < n - i - 1; j++) {
+        props.activeComparison([j, j + 1]);
         if (arr[j] > arr[j + 1]) {
           await swap(arr, j, j + 1);
         }
@@ -23,13 +31,11 @@ function Sorters(props: any) {
   };
 
   const swap = async (arr: Array<number>, i: number, j: number) => {
-    // await highlightChange(arr, i, j, true);
-
+    await new Promise(r => setTimeout(r, 100));
+    props.swapCells();
     let temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
-
-    // await highlightChange(arr, i, j, false);
   };
 
   const mergeSort: SortFunction = async (numbers: Array<number>) => {
@@ -47,8 +53,6 @@ function Sorters(props: any) {
     props.chooseSorter(event.currentTarget.id, kind.func);
   };
 
-
-
   return (
     <>
       <div className="sorters">
@@ -58,7 +62,9 @@ function Sorters(props: any) {
           </button>
         ))}
       </div>
-      <button className="submitButton" onClick={props.startSorting}>Sort this Biatchh</button>
+      <button className="submitButton" onClick={props.startSorting}>
+        Sort this Biatchh
+      </button>
     </>
   );
 }

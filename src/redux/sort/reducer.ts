@@ -3,6 +3,7 @@ import {
   CHOOSE_SORTER,
   GENERATE_NEW_ARRAY,
   ACTIVE_COMPARISON,
+  SWAP_CELLS,
   START_SORTING
 } from "./types";
 
@@ -13,10 +14,34 @@ export type SortAction = ActionType<typeof actions>;
 
 const initialState: SortState = {
   chosenSorter: "",
-  sortFunction: undefined,
-  array: [4, 3, 1, 2],
+  sortFunction: numbers => numbers,
+  array: [40, 30, 10, 20],
   comparisonIndexes: [-1, -1],
   shouldSwap: false
+};
+
+const bubbleSort = (numbers: Array<number>) => {
+  let arr = numbers;
+  let n = arr.length;
+  for (let i = 0; i < n - 1; i++) {
+    for (let j = 0; j < n - i - 1; j++) {
+      if (arr[j] > arr[j + 1]) {
+        swap(arr, j, j + 1);
+      }
+    }
+  }
+  return arr;
+};
+
+const swap = (arr: Array<number>, i: number, j: number) => {
+  let temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
+};
+
+const sort = (state: SortState) => {
+  const arr = bubbleSort(state.array);
+  return arr;
 };
 
 const sortReducer = (state = initialState, action: SortAction) => {
@@ -37,11 +62,18 @@ const sortReducer = (state = initialState, action: SortAction) => {
       return {
         ...state,
         comparisonIndexes: action.payload.comparisonIndexes,
-        shouldSwap: action.payload.shouldSwap
+        shouldSwap: false
+      };
+    case SWAP_CELLS:
+      return {
+        ...state,
+        shouldSwap: true
       };
     case START_SORTING:
+      // const arr = sort(state);
       return {
         ...state
+        // array: [...arr]
       };
     default:
       return state;
