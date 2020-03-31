@@ -1,7 +1,5 @@
-import { action, Action } from "typesafe-actions";
-import { ThunkAction, ThunkDispatch } from "redux-thunk";
+import { action } from "typesafe-actions";
 
-import { AppState } from "../index";
 import { store } from "../../index";
 import { MIN_VALUE, MAX_VALUE } from "./constants";
 import {
