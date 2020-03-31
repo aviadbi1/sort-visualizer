@@ -12,16 +12,12 @@ export type ChooseSorterActionPayloadType = {
   readonly sortFunction: SortFunction;
 };
 
-export type ActiveComparisonActionPayloadType = {
-  readonly comparisonIndexes: [number, number];
-};
-
 // Describe the state
 export interface SortState {
   readonly chosenSorter: string;
   readonly sortFunction: SortFunction;
   readonly array: Array<number>;
-  readonly comparisonIndexes: [number, number];
+  readonly comparisonIndexes: Array<number>;
   readonly shouldSwap: boolean;
 }
 
@@ -44,7 +40,7 @@ interface GenerateNewArrayAction {
 
 interface ActiveComparisonAction {
   type: typeof ACTIVE_COMPARISON;
-  payload: [number, number];
+  payload: Array<number>;
 }
 
 interface SwapCellsAction {

@@ -33,7 +33,7 @@ function Sorters(props: any) {
 
   const swap = async (arr: Array<number>, i: number, j: number) => {
     props.swapCells();
-    await new Promise(r => setTimeout(r, 500));
+    await new Promise(r => setTimeout(r, 400));
     let temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
@@ -52,13 +52,23 @@ function Sorters(props: any) {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     props.chooseSorter(event.currentTarget.id, kind.func);
+    document
+      .getElementsByClassName("sorterButton active")
+      .item(0)
+      ?.classList.remove("active");
+    document.getElementById(event.currentTarget.id)?.classList.add("active");
   };
 
   return (
     <>
       <div className="sorters">
         {sortKinds.map((kind, index) => (
-          <button key={index} id={kind.name} onClick={onClick(kind)}>
+          <button
+            key={index}
+            id={kind.name}
+            className="sorterButton"
+            onClick={onClick(kind)}
+          >
             {kind.title}
           </button>
         ))}

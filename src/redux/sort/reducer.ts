@@ -16,7 +16,7 @@ const initialState: SortState = {
   chosenSorter: "",
   sortFunction: numbers => numbers,
   array: [40, 30, 10, 20],
-  comparisonIndexes: [-1, -1],
+  comparisonIndexes: [],
   shouldSwap: false
 };
 
@@ -47,10 +47,8 @@ const sortReducer = (state = initialState, action: SortAction) => {
         shouldSwap: true
       };
     case START_SORTING:
-      // const arr = sort(state);
       return {
         ...state
-        // array: [...arr]
       };
     default:
       return state;

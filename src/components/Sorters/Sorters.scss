@@ -1,17 +1,25 @@
+@import "../MenuBar/MenuBar";
+
 .sorters {
   font-size: 14px;
   flex-shrink: 1;
 }
 
-.sorters button {
+.sorterButton {
+  @extend %button;
   padding: 5px 20px;
+  border: none;
 }
 
-.sorters button:hover {
+.sorterButton:hover {
   color: rgb(124, 53, 255);
 }
 
-.sorters button:active {
+.sorterButton.active {
   background-color: transparent;
   color: rgb(124, 53, 255);
+}
+
+.sorterButton:active {
+  @extend .sorterButton.active;
 }

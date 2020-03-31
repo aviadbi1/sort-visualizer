@@ -10,12 +10,12 @@
   font-family: cursive;
   border: transparent;
   background-color: transparent;
-  transition-duration: 0.4s;
+  transition-duration: 0.2s;
   padding: 0px 20px;
   color: white;
 }
 
-.menu button {
+.menu > button {
   @extend %button;
 }
 
