@@ -1,15 +1,31 @@
 import { action } from "typesafe-actions";
 
 import { MIN_VALUE, MAX_VALUE } from "./constants";
-import { CHOOSE_SORTER, GENERATE_NEW_ARRAY, SortFunction } from "./types";
+import {
+  CHOOSE_SORTER,
+  GENERATE_NEW_ARRAY,
+  ACTIVE_COMPARISON,
+  START_SORTING,
+  SortFunction
+} from "./types";
 
 export const chooseSorter = (sorter: string, func: SortFunction) =>
   action(CHOOSE_SORTER, { sorter, sortFunction: func });
 
+export const startSorting = () => {
+  console.log("sort");
+  return action(START_SORTING, {});
+};
+
+export const activeComparison = (
+  indexes: [number, number],
+  shouldSwap: boolean
+) => action(ACTIVE_COMPARISON, { comparisonIndexes: indexes, shouldSwap });
+
 export const generateNewArray = (newSize: number) => {
   let newArr = [];
   for (let i = 0; i < newSize; i++) {
-    const val = Math.floor(MIN_VALUE + Math.random() * MAX_VALUE);
+    const val = Math.floor(MIN_VALUE + Math.random() * (MAX_VALUE - MIN_VALUE));
     newArr[i] = val;
   }
   return action(GENERATE_NEW_ARRAY, newArr);

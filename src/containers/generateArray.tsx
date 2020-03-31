@@ -6,7 +6,6 @@ import { AppState } from "../redux";
 import GenerateArraySlider from "../components/GenerateArraySlider/GenerateArraySlider";
 
 const mapStateToProps = (state: AppState) => ({
-  sort: state.sort,
   MIN_VALUE,
   MAX_VALUE
 });

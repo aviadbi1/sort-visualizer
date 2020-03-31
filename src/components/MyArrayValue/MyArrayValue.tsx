@@ -2,21 +2,17 @@ import React from "react";
 import "./MyArrayValue.scss";
 
 type MyArrayValueProps = {
-  item: MyArrayValueItemType;
-};
-
-export type MyArrayValueItemType = {
   value: number;
   active: boolean;
+  swap: boolean;
 };
 
 export function MyArrayValue(props: MyArrayValueProps) {
-  let active = props.item.active ? "-active" : "";
+  let active = props.active ? "-active" : "";
+  // let swap = props.swap ? "-swap" : "";
   return (
     <div className="chart">
-      <div className={`bar${active}-${props.item.value}`}>
-        {/* {props.value} */}
-      </div>
+      <div className={`bar${active}-${props.value}`}>{/* {props.value} */}</div>
     </div>
   );
 }

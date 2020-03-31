@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { chooseSorter } from "../redux/sort/actions";
+import { chooseSorter, startSorting } from "../redux/sort/actions";
 import Sorters from "../components/Sorters/Sorters";
 import { Dispatch, bindActionCreators } from "redux";
 import { AppState } from "../redux";
@@ -13,7 +13,8 @@ const mapStateToProps = (state: AppState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
-      chooseSorter: chooseSorter
+      chooseSorter: chooseSorter,
+      startSorting: startSorting
     },
     dispatch
   );

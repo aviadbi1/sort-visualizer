@@ -10,7 +10,6 @@ function MenuBar(props: MenuBarProps) {
     <div className="menu">
       <GenerateArray></GenerateArray>
       <FilterSorters></FilterSorters>
-      <button className="submitButton">Sort this Biatchh</button>
     </div>
   );
 }
