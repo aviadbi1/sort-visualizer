@@ -8,10 +8,25 @@ import {
 import Sorters from "../components/Sorters/Sorters";
 import { Dispatch, bindActionCreators } from "redux";
 import { AppState } from "../redux";
+import { mergeSort } from "../algorithms/mergeSort";
+import { bubbleSort } from "../algorithms/bubbleSort";
 
-const mapStateToProps = (state: AppState) => ({
-  sort: state.sort
-});
+export type SortKindType = {
+  name: string;
+  func: any;
+  title: string;
+};
+
+const mapStateToProps = (state: AppState) => {
+  const sortKinds: Array<SortKindType> = [
+    { name: "bubbleSort", func: bubbleSort, title: "Bubble Sort" },
+    { name: "mergeSort", func: mergeSort, title: "Merge Sort" }
+  ];
+  return {
+    sorter: state.sort.chosenSorter,
+    sortKinds
+  };
+};
 
 // "dispatch" argument needs an annotation to check the correct shape
 //  of an action object when using dispatch function
@@ -21,7 +36,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
       chooseSorter,
       activeComparison,
       swapCells,
-      startSorting
+      startSorting: () => startSorting(dispatch)
     },
     dispatch
   );
