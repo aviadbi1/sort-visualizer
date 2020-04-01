@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   chooseSorter,
   startSorting,
@@ -17,6 +17,7 @@ interface SortersProps {
 }
 
 function Sorters(props: any) {
+  const [sorterName, setSorterName] = useState("");
   const bubbleSort: SortFunction = async (numbers: Array<number>) => {
     let arr = numbers;
     let n = arr.length;
@@ -48,15 +49,25 @@ function Sorters(props: any) {
     { name: "mergeSort", func: mergeSort, title: "Merge Sort" }
   ];
 
-  const onClick = (kind: any) => (
+  const chooseSorter = (kind: any) => (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    props.chooseSorter(event.currentTarget.id, kind.func);
+    const chosenSorterName = event.currentTarget.id;
+    setSorterName(chosenSorterName);
+    props.chooseSorter(chosenSorterName, kind.func);
     document
       .getElementsByClassName("sorterButton active")
       .item(0)
       ?.classList.remove("active");
-    document.getElementById(event.currentTarget.id)?.classList.add("active");
+    document.getElementById(chosenSorterName)?.classList.add("active");
+  };
+
+  const submit = () => {
+    if (sorterName === "") {
+      alert("Choose a FUCKING sorter");
+    } else {
+      props.startSorting();
+    }
   };
 
   return (
@@ -67,13 +78,13 @@ function Sorters(props: any) {
             key={index}
             id={kind.name}
             className="sorterButton"
-            onClick={onClick(kind)}
+            onClick={chooseSorter(kind)}
           >
             {kind.title}
           </button>
         ))}
       </div>
-      <button className="submitButton" onClick={props.startSorting}>
+      <button className="submitButton" onClick={submit}>
         Sort this Biatchh
       </button>
     </>
