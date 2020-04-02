@@ -1,22 +1,36 @@
-import { activeComparison, sortedCells, changeValue } from "../redux/sort/actions";
+import {
+  activeComparison,
+  sortedCells,
+  changeValue,
+  hideChangeValue,
+  hideActiveComparison
+} from "../redux/sort/actions";
+import { ICell } from "../redux/sort/types";
 
 async function swap(
-  arr: Array<number>,
+  arr: Array<ICell<number>>,
   i: number,
   j: number,
   dispatch: any,
   animationSpeed: number
 ) {
-  let temp = arr[i];
-  arr[i] = arr[j];
-  dispatch(changeValue(i, arr[i]));
-  arr[j] = temp;
-  dispatch(changeValue(j, arr[j]));
-  await new Promise(r => setTimeout(r, animationSpeed));
+  let temp = arr[i].value;
+  // arr[i].value = arr[j].value;
+  dispatch(changeValue(i, arr[j].value));
+  // arr[j].value = temp;
+  dispatch(changeValue(j, temp));
+  await new Promise(r =>
+    setTimeout(() => {
+      r(() => {
+        dispatch(hideChangeValue(i));
+        dispatch(hideChangeValue(j));
+      });
+    }, animationSpeed)
+  );
 }
 
 export async function bubbleSort(
-  numbers: Array<number>,
+  numbers: Array<ICell<number>>,
   dispatch: any,
   animationSpeed: number
 ) {
@@ -25,9 +39,15 @@ export async function bubbleSort(
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n - i - 1; j++) {
       dispatch(activeComparison([j, j + 1]));
-      await new Promise(r => setTimeout(r, animationSpeed));
-
-      if (arr[j] > arr[j + 1]) {
+      // await new Promise(r => setTimeout(r, animationSpeed));
+      await new Promise(r =>
+        setTimeout(() => {
+          r(() => {
+            dispatch(hideActiveComparison([j, j + 1]));
+          });
+        }, animationSpeed)
+      );
+      if (arr[j].value > arr[j + 1].value) {
         await swap(arr, j, j + 1, dispatch, animationSpeed);
       }
     }

@@ -11,17 +11,14 @@ function MyArray(props: MyArrayProps) {
   return (
     <div className="container">
       <div className="array">
-        {props.sort.array.map((number, index) => {
-          let active = props.sort.comparisonIndexes.indexOf(index) !== -1;
-          let swap = active && props.sort.shouldSwap;
-          let sortedAlready = props.sort.sortedCells.indexOf(index) !== -1;
+        {props.sort.array.map((cell, index) => {
           return (
             <MyArrayValue
               key={index}
-              active={active}
-              swap={swap}
-              sortedAlready={sortedAlready}
-              value={number}
+              active={cell.comparing}
+              swap={cell.swapping}
+              sortedAlready={cell.sorted}
+              value={cell.value}
             ></MyArrayValue>
           );
         })}
