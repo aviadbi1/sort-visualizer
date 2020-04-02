@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import {
-  chooseSorter,
-  swapCells,
-  activeComparison
-} from "../../redux/sort/actions";
+import { chooseSorter, activeComparison } from "../../redux/sort/actions";
 import "./Sorters.scss";
 import { SortKindType } from "../../containers/sorters";
 
@@ -12,7 +8,6 @@ interface SortersProps {
   sortKinds: Array<SortKindType>;
   chooseSorter: typeof chooseSorter;
   activeComparison: typeof activeComparison;
-  swapCells: typeof swapCells;
   startSorting: any;
 }
 

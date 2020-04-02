@@ -3,7 +3,7 @@ import {
   CHOOSE_SORTER,
   GENERATE_NEW_ARRAY,
   ACTIVE_COMPARISON,
-  SWAP_CELLS,
+  CHANGE_VALUE,
   SORTED_CELLS,
   START_SORTING
 } from "./types";
@@ -46,24 +46,32 @@ const sortReducer = (state = initialState, action: SortAction) => {
         comparisonIndexes: action.payload.comparisonIndexes,
         shouldSwap: false
       };
-    case SWAP_CELLS:
+    case CHANGE_VALUE:
+      let i = action.payload.i;
+      let val = action.payload.val;
+      let arr = [...state.array];
+      arr[i] = val;
       return {
         ...state,
-        shouldSwap: true
+        shouldSwap: true,
+        array: arr
       };
     case SORTED_CELLS:
       const sortedCells = state.sortedCells.concat(action.payload);
       let shouldSwap = state.shouldSwap;
       let comparisonIndexes = state.comparisonIndexes;
+      let isRunning = state.isRunning;
       if (sortedCells.length === state.array.length) {
         shouldSwap = false;
         comparisonIndexes = [];
+        isRunning = false;
       }
       return {
         ...state,
         sortedCells,
         comparisonIndexes,
-        shouldSwap
+        shouldSwap,
+        isRunning
       };
     case START_SORTING:
       return {

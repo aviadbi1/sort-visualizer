@@ -6,10 +6,10 @@ import {
   CHOOSE_SORTER,
   GENERATE_NEW_ARRAY,
   ACTIVE_COMPARISON,
-  SWAP_CELLS,
   START_SORTING,
   SORTED_CELLS,
-  SortFunction
+  SortFunction,
+  CHANGE_VALUE
 } from "./types";
 import { Dispatch } from "redux";
 
@@ -28,9 +28,8 @@ export const generateNewArray = (newSize: number) => {
   return action(GENERATE_NEW_ARRAY, newArr);
 };
 
-export const swapCells = () => {
-  console.log("swap");
-  return action(SWAP_CELLS, {});
+export const changeValue = (i: number, val: number) => {
+  return action(CHANGE_VALUE, { i, val });
 };
 
 export const startSorting = (dispatch: Dispatch) => {
@@ -40,7 +39,6 @@ export const startSorting = (dispatch: Dispatch) => {
   return action(START_SORTING, {});
 };
 
-
-export const sortedCells = (sortedCells:Array<number>) => {
+export const sortedCells = (sortedCells: Array<number>) => {
   return action(SORTED_CELLS, sortedCells);
 };

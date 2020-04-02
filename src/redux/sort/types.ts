@@ -31,7 +31,7 @@ export interface SortState {
 export const CHOOSE_SORTER = "CHOOSE_SORTER";
 export const GENERATE_NEW_ARRAY = "GENERATE_NEW_ARRAY";
 export const ACTIVE_COMPARISON = "ACTIVE_COMPARISON";
-export const SWAP_CELLS = "SWAP_CELLS";
+export const CHANGE_VALUE = "CHANGE_VALUE";
 export const START_SORTING = "START_SORTING";
 export const SORTED_CELLS = "SORTED_CELLS";
 
@@ -50,9 +50,9 @@ interface ActiveComparisonAction {
   payload: Array<number>;
 }
 
-interface SwapCellsAction {
-  type: typeof SWAP_CELLS;
-  payload: {};
+interface ChangeValueAction {
+  type: typeof CHANGE_VALUE;
+  payload: { i: number; val: number };
 }
 
 interface StartSortingAction {
@@ -64,10 +64,11 @@ interface SortedCellsAction {
   type: typeof SORTED_CELLS;
   payload: Array<number>;
 }
+
 export type SortActionTypes =
   | ChooseSorterAction
   | GenerateNewArrayAction
   | ActiveComparisonAction
-  | SwapCellsAction
+  | ChangeValueAction
   | StartSortingAction
   | SortedCellsAction;

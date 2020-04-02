@@ -1,10 +1,5 @@
 import { connect } from "react-redux";
-import {
-  chooseSorter,
-  activeComparison,
-  swapCells,
-  startSorting
-} from "../redux/sort/actions";
+import { chooseSorter, activeComparison, startSorting } from "../redux/sort/actions";
 import Sorters from "../components/Sorters/Sorters";
 import { Dispatch, bindActionCreators } from "redux";
 import { AppState } from "../redux";
@@ -35,7 +30,6 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
     {
       chooseSorter,
       activeComparison,
-      swapCells,
       startSorting: () => startSorting(dispatch)
     },
     dispatch
