@@ -6,6 +6,7 @@ import {
   hideActiveComparison
 } from "../redux/sort/actions";
 import { ICell } from "../redux/sort/types";
+import { wait } from "./utils";
 
 async function swap(
   arr: Array<ICell<number>>,
@@ -19,14 +20,9 @@ async function swap(
   dispatch(changeValue(i, arr[j].value));
   // arr[j].value = temp;
   dispatch(changeValue(j, temp));
-  await new Promise(r =>
-    setTimeout(() => {
-      r(() => {
-        dispatch(hideChangeValue(i));
-        dispatch(hideChangeValue(j));
-      });
-    }, animationSpeed)
-  );
+  await wait(animationSpeed);
+  dispatch(hideChangeValue(i));
+  dispatch(hideChangeValue(j));
 }
 
 export async function bubbleSort(
@@ -34,19 +30,14 @@ export async function bubbleSort(
   dispatch: any,
   animationSpeed: number
 ) {
-  let arr = [...numbers];
+  let arr = numbers;
   let n = arr.length;
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n - i - 1; j++) {
       dispatch(activeComparison([j, j + 1]));
-      // await new Promise(r => setTimeout(r, animationSpeed));
-      await new Promise(r =>
-        setTimeout(() => {
-          r(() => {
-            dispatch(hideActiveComparison([j, j + 1]));
-          });
-        }, animationSpeed)
-      );
+      await wait(animationSpeed);
+      dispatch(hideActiveComparison([j, j + 1]));
+
       if (arr[j].value > arr[j + 1].value) {
         await swap(arr, j, j + 1, dispatch, animationSpeed);
       }

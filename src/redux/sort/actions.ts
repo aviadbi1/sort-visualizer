@@ -20,10 +20,10 @@ import { Cell } from "./cell";
 export const chooseSorter = (sorter: string, func: SortFunction) =>
   action(CHOOSE_SORTER, { sorter, sortFunction: func });
 
-export const activeComparison = (indexes: [number, number]) =>
+export const activeComparison = (indexes: Array<number>) =>
   action(ACTIVE_COMPARISON, { comparisonIndexes: indexes });
 
-export const hideActiveComparison = (indexes: [number, number]) =>
+export const hideActiveComparison = (indexes: Array<number>) =>
   action(HIDE_ACTIVE_COMPARISON, { comparisonIndexes: indexes });
 
 export const generateNewArray = (newSize: number) => {
