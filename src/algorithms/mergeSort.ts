@@ -9,11 +9,11 @@ import { ICell } from "../redux/sort/types";
 import { wait } from "./utils";
 
 function getActiveComparisonIndexes(
+  offset: number,
   lIndex: number,
-  rIndex: number,
   leftLength: number,
-  rightLength: number,
-  offset: number
+  rIndex: number = 0,
+  rightLength: number = 0
 ): Array<number> {
   let activeComparisonIndexes: Array<number> = [];
   if (lIndex < leftLength) {
@@ -38,11 +38,11 @@ async function merge(
   let rIndex = 0;
   while (lIndex + rIndex < left.length + right.length) {
     let activeComparisonIndexes = getActiveComparisonIndexes(
+      offset,
       lIndex,
-      rIndex,
       left.length,
-      right.length,
-      offset
+      rIndex,
+      right.length
     );
     dispatch(activeComparison(activeComparisonIndexes));
     await wait(animationSpeed);
@@ -52,28 +52,27 @@ async function merge(
     const rItem = right[rIndex];
     const comparisonIndex = offset + array.length;
 
+    console.log(`${lItem}, ${rItem}, ${comparisonIndex}`);
+
     if (lItem == null) {
       dispatch(changeValue(comparisonIndex, rItem));
-      // await wait(animationSpeed);
+      await wait(animationSpeed);
       dispatch(hideChangeValue(comparisonIndex));
 
-      dispatch(sortedCells([comparisonIndex]));
       array.push(rItem);
       rIndex++;
     } else if (rItem == null) {
       dispatch(changeValue(comparisonIndex, lItem));
-      // await wait(animationSpeed);
+      await wait(animationSpeed);
       dispatch(hideChangeValue(comparisonIndex));
 
-      dispatch(sortedCells([comparisonIndex]));
       array.push(lItem);
       lIndex++;
     } else if (lItem <= rItem) {
       dispatch(changeValue(comparisonIndex, lItem));
-      // await wait(animationSpeed);
+      await wait(animationSpeed);
       dispatch(hideChangeValue(comparisonIndex));
 
-      dispatch(sortedCells([comparisonIndex]));
       array.push(lItem);
       lIndex++;
     } else {
@@ -81,10 +80,12 @@ async function merge(
       await wait(animationSpeed);
       dispatch(hideChangeValue(comparisonIndex));
 
-      dispatch(sortedCells([comparisonIndex]));
       array.push(rItem);
       rIndex++;
     }
+    await wait(animationSpeed);
+    dispatch(sortedCells([comparisonIndex]));
+    dispatch(sortedCells(activeComparisonIndexes));
   }
   return array;
 }
@@ -96,6 +97,8 @@ async function asyncMergeSort(
   animationSpeed: number
 ): Promise<Array<number>> {
   if (numbers.length <= 1) {
+    let activeComparisonIndexes = getActiveComparisonIndexes(offset, 0, 1);
+    dispatch(sortedCells(activeComparisonIndexes));
     return numbers;
   }
   const middle = Math.floor(numbers.length / 2);
