@@ -26,4 +26,8 @@ export class Cell implements ICell<number> {
   public setSorted(sorted: boolean) {
     this.sorted = sorted;
   }
+
+  public getCopy() {
+    return new Cell(this.value);
+  }
 }

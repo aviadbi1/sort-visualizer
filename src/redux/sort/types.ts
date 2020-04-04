@@ -7,6 +7,7 @@ export interface ICell<T> {
   setComparing: (comparing: boolean) => void;
   setSwapping: (swapping: boolean) => void;
   setSorted: (sorted: boolean) => void;
+  getCopy: () => ICell<T>;
 }
 
 export type SortFunction = (
