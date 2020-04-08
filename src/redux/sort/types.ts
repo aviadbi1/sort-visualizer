@@ -1,15 +1,20 @@
-// // Describing the shape of the chat's slice of state
-// export interface Message {
-//   user: string;
-//   message: string;
-//   timestamp: number;
-// }
+export interface ICell<T> {
+  value: T;
+  comparing: boolean;
+  swapping: boolean;
+  sorted: boolean;
+  setValue: (val: T) => void;
+  setComparing: (comparing: boolean) => void;
+  setSwapping: (swapping: boolean) => void;
+  setSorted: (sorted: boolean) => void;
+  getCopy: () => ICell<T>;
+}
 
 export type SortFunction = (
-  arr: Array<number>,
+  arr: Array<ICell<number>>,
   dispatch: any,
   animationSpeed: number
-) => Array<number>;
+) => Array<ICell<number>>;
 
 export type ChooseSorterActionPayloadType = {
   readonly chosenSorter: string;
@@ -20,10 +25,7 @@ export type ChooseSorterActionPayloadType = {
 export interface SortState {
   readonly chosenSorter: string;
   readonly sortFunction: SortFunction;
-  readonly array: Array<number>;
-  readonly sortedCells: Array<number>;
-  readonly comparisonIndexes: Array<number>;
-  readonly shouldSwap: boolean;
+  readonly array: Array<ICell<number>>;
   readonly isRunning: boolean;
 }
 
@@ -31,7 +33,9 @@ export interface SortState {
 export const CHOOSE_SORTER = "CHOOSE_SORTER";
 export const GENERATE_NEW_ARRAY = "GENERATE_NEW_ARRAY";
 export const ACTIVE_COMPARISON = "ACTIVE_COMPARISON";
+export const HIDE_ACTIVE_COMPARISON = "HIDE_ACTIVE_COMPARISON";
 export const CHANGE_VALUE = "CHANGE_VALUE";
+export const HIDE_CHANGE_VALUE = "HIDE_CHANGE_VALUE";
 export const START_SORTING = "START_SORTING";
 export const SORTED_CELLS = "SORTED_CELLS";
 
@@ -50,9 +54,18 @@ interface ActiveComparisonAction {
   payload: Array<number>;
 }
 
+interface HideActiveComparisonAction {
+  type: typeof HIDE_ACTIVE_COMPARISON;
+  payload: Array<number>;
+}
+
 interface ChangeValueAction {
   type: typeof CHANGE_VALUE;
   payload: { i: number; val: number };
+}
+interface HideChangeValueAction {
+  type: typeof HIDE_CHANGE_VALUE;
+  payload: number;
 }
 
 interface StartSortingAction {
@@ -69,6 +82,8 @@ export type SortActionTypes =
   | ChooseSorterAction
   | GenerateNewArrayAction
   | ActiveComparisonAction
+  | HideActiveComparisonAction
   | ChangeValueAction
+  | HideChangeValueAction
   | StartSortingAction
   | SortedCellsAction;
